@@ -1,0 +1,57 @@
+##Run DistributedShell With a Shell Command
+
+##Launch the YARN job using the yarn command
+yarn jar /opt/mapr/hadoop/hadoop-2.7.0/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.7.0-mapr-1506.jar \
+-shell_command /bin/ls \
+-shell_args /user/user01 \
+-jar /opt/mapr/hadoop/hadoop-2.7.0/share/hadoop/yarn/hadoop-yarn-applications-distributedshell-2.7.0-mapr-1506.jar
+
+##When the job completes, scroll back through the output to determine your container ID for the shell
+##Submitted application application_1439440834683_0003
+
+##Check Standard Output and Standard Error for Job
+
+#Change directory to the output directory for YARN jobs
+cd /opt/mapr/hadoop/hadoop-2.7.0/logs/userlogs
+
+#List the contents of the directory
+ls
+
+#Change directory to your application output directory
+cd application_1439440834683_0003
+
+#Change directory to the second container output directory
+cd container_e02_1439440834683_0003_01_000002
+
+#Display the contents of the stdout file. You should see a listing of the /user/user01 directory
+cat stdout
+
+#Display the contents of the stderr file. It should be empty.
+cat stderr
+
+##Copy the Lab Files
+1. Create a directory as follows
+mkdir /user/user01/3
+
+2. Copy the source code from your laptop into that directory
+scp -P 2222 /Users/gangadharkadam/Downloads/DEV_301_COURSE_MATERIALS/COURSE_FILES/DEV301LABFILESV410/RECEIPTS_LAB.zip user01@localhost:/user/user01/3
+
+3. Change directory into the directory. 
+cd /user/user01/3
+
+4. Unzip the RECEIPTS_LAB.zip file. 
+unzip RECEIPTS_LAB.zip
+
+##Exercise 3.2: Modify Code in the Driver
+1.Change directory into the RECEIPTS_LAB directory. 
+cd /user/user01/3/RECEIPTS_LAB
+
+2. Open the ReceiptsDriver.java source file with your favorite text editor.
+vi ReceiptsDriver.java
+
+3. Make the following changes to the driver
+//TODO Change the name of the job to a string of your choice
+HINT: Change the string “my receipts” to any string of your choice
+//TODO Comment out the Reducer definition
+HINT: The reducer is defined by the setReducerClass() method of the Job object
+4. Save the ReceiptsDriver.java file.
